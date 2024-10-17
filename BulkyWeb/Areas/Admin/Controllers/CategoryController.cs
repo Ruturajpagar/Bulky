@@ -3,7 +3,7 @@ using Bulky.Models;
 using Microsoft.AspNetCore.Mvc;
 using Bulky.DataAccess.Repository.IRepository;
 
-namespace BulkyWeb.Controllers
+namespace BulkyWeb.Areas.Admin.Controllers
 {
     public class CategoryController : Controller
     {
@@ -11,11 +11,11 @@ namespace BulkyWeb.Controllers
 
         public CategoryController(IUnitOfWork unitOfWork)
         {
-            _unitOfWork = unitOfWork; 
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
-        {   
+        {
             List<Category> objCategoryList = _unitOfWork.CategoryRepository.GetAll().ToList();
 
             return View(objCategoryList);
@@ -46,7 +46,7 @@ namespace BulkyWeb.Controllers
             {
                 return NotFound();
             }
-            Category category = _unitOfWork.CategoryRepository.Get(u=>u.Id==Id);
+            Category category = _unitOfWork.CategoryRepository.Get(u => u.Id == Id);
 
             if (category == null)
             {
@@ -75,7 +75,7 @@ namespace BulkyWeb.Controllers
             {
                 return NotFound();
             }
-            Category category = _unitOfWork.CategoryRepository.Get(u=>u.Id==Id);
+            Category category = _unitOfWork.CategoryRepository.Get(u => u.Id == Id);
 
             if (category == null)
             {
@@ -92,7 +92,7 @@ namespace BulkyWeb.Controllers
             {
                 return NotFound();
             }
-         
+
             _unitOfWork.CategoryRepository.Remove(category);
             _unitOfWork.Save();
             TempData["success"] = "Category deleted successfully.";
